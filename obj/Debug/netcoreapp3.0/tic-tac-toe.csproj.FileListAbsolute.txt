@@ -1,0 +1,11 @@
+/home/falconerd/dev/tic-tac-toe/obj/Debug/netcoreapp3.0/tic-tac-toe.csprojAssemblyReference.cache
+/home/falconerd/dev/tic-tac-toe/obj/Debug/netcoreapp3.0/tic-tac-toe.AssemblyInfoInputs.cache
+/home/falconerd/dev/tic-tac-toe/obj/Debug/netcoreapp3.0/tic-tac-toe.AssemblyInfo.cs
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe.deps.json
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe.runtimeconfig.json
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe.runtimeconfig.dev.json
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe.dll
+/home/falconerd/dev/tic-tac-toe/bin/Debug/netcoreapp3.0/tic-tac-toe.pdb
+/home/falconerd/dev/tic-tac-toe/obj/Debug/netcoreapp3.0/tic-tac-toe.dll
+/home/falconerd/dev/tic-tac-toe/obj/Debug/netcoreapp3.0/tic-tac-toe.pdb
