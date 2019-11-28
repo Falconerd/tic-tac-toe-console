@@ -11,7 +11,7 @@ namespace tic_tac_toe
     public bool playerTurn = true;
     public Status status = Status.Playing;
     public Square[] board = Enumerable.Range(0, 9)
-        .Select(x => Square.E).ToArray();
+      .Select(x => Square.E).ToArray();
   }
 
   class Program
@@ -30,7 +30,7 @@ namespace tic_tac_toe
         {
           if (state.playerTurn)
             state = Update(0,
-                (int)Char.GetNumericValue(input) - 1, state);
+              (int)Char.GetNumericValue(input) - 1, state);
 
           if (!state.playerTurn && state.status == Status.Playing)
             state = Update(1, AiInput(state.board), state);
@@ -126,16 +126,32 @@ namespace tic_tac_toe
           .Where(x => x.x == Square.X).Select(x => x.i);
 
       var sequence = winners.Where(x =>
-          x.Intersect(playerMoves).Count() == 2).FirstOrDefault(x =>
-              x.Any(x => board[x] == Square.E));
+        x.Intersect(playerMoves).Count() == 2).FirstOrDefault(x =>
+          x.Any(x => board[x] == Square.E));
 
-      if (sequence == null || sequence.Length != 3)
+	  if (board[4] == Square.E)
+	  {
+		return 4;
+	  }
+      else if (sequence == null || sequence.Length != 3)
       {
-        var moves = board.Select((x, i) => (new { x, i }))
+		var playerCorners = playerMoves.Where(x => IsCorner(x));
+		var clearCorners = board.Select((x, i) => new { x, i })
+		  .Where(x => x.x == Square.E && IsCorner(x.i));
+
+		if (clearCorners.Any())
+		{
+		  var random = new Random();
+		  return clearCorners.OrderBy(x => random.Next()).First().i;
+		}
+		else
+		{
+          var moves = board.Select((x, i) => (new { x, i }))
             .Where(x => x.x == Square.E).ToArray();
 
-        var index = new Random().Next(0, moves.Length);
-        return moves[index].i;
+          var index = new Random().Next(0, moves.Length);
+          return moves[index].i;
+		}
       }
       else
       {
@@ -150,7 +166,7 @@ namespace tic_tac_toe
       board[pos] = glyph;
 
       var moves = board.Select((x, i) => new { x, i })
-          .Where(x => x.x == glyph).Select(x => x.i);
+        .Where(x => x.x == glyph).Select(x => x.i);
 
       if (moves.Count() <= 2)
         return false;
@@ -163,11 +179,13 @@ namespace tic_tac_toe
 
     static int[][] winners =
         new int[][] {
-            new int[] { 0, 1, 2 }, new int[] { 0, 3, 6 },
-            new int[] { 3, 4, 5 }, new int[] { 1, 4, 7 },
-            new int[] { 6, 7, 8 }, new int[] { 2, 5, 8 },
-            new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 }
+          new int[] { 0, 1, 2 }, new int[] { 0, 3, 6 },
+          new int[] { 3, 4, 5 }, new int[] { 1, 4, 7 },
+          new int[] { 6, 7, 8 }, new int[] { 2, 5, 8 },
+          new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 }
         };
+
+	static int[] corners = { 0, 2, 6, 8 };
 
     static bool TurnWillDraw(int pos, Square[] board, bool playerTurn)
     {
@@ -176,5 +194,10 @@ namespace tic_tac_toe
 
       return board.Where(x => x == Square.E).Count() == 0;
     }
+
+	static bool IsCorner(int pos)
+	{
+      return corners.Contains(pos);
+	}
   }
 }
