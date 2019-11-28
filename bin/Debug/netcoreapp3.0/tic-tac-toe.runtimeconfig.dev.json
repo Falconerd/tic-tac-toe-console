@@ -1,8 +1,0 @@
-{
-  "runtimeOptions": {
-    "additionalProbingPaths": [
-      "/home/falconerd/.dotnet/store/|arch|/|tfm|",
-      "/home/falconerd/.nuget/packages"
-    ]
-  }
-}
