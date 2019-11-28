@@ -41,16 +41,16 @@ namespace tic_tac_toe
       Console.WriteLine(View(state));
     }
 
-    static State Update(int player, int position, State state)
+    static State Update(int player, int pos, State state)
     {
-      if (state.board[position] != Square.E)
+      if (state.board[pos] != Square.E)
         return state;
 
-      if (TurnWillWin(position, state.board, state.playerTurn))
+      if (TurnWillWin(pos, state.board, state.playerTurn))
       {
         state.status = player == 0 ? Status.Victory : Status.Defeat;
       }
-      else if (TurnWillDraw(position, state.board, state.playerTurn))
+      else if (TurnWillDraw(pos, state.board, state.playerTurn))
       {
         state.status = Status.Draw;
       }
@@ -58,11 +58,11 @@ namespace tic_tac_toe
       switch (player)
       {
         case 0:
-          state.board[position] = Square.X;
+          state.board[pos] = Square.X;
           state.playerTurn = false;
           return state;
         case 1:
-          state.board[position] = Square.O;
+          state.board[pos] = Square.O;
           state.playerTurn = true;
           return state;
         default:
@@ -144,10 +144,10 @@ namespace tic_tac_toe
       }
     }
 
-    static bool TurnWillWin(int position, Square[] board, bool playerTurn)
+    static bool TurnWillWin(int pos, Square[] board, bool playerTurn)
     {
       var glyph = playerTurn ? Square.X : Square.O;
-      board[position] = glyph;
+      board[pos] = glyph;
 
       var moves = board.Select((x, i) => new { x, i })
           .Where(x => x.x == glyph).Select(x => x.i);
@@ -169,10 +169,10 @@ namespace tic_tac_toe
             new int[] { 0, 4, 8 }, new int[] { 2, 4, 6 }
         };
 
-    static bool TurnWillDraw(int position, Square[] board, bool playerTurn)
+    static bool TurnWillDraw(int pos, Square[] board, bool playerTurn)
     {
       var glyph = playerTurn ? Square.X : Square.O;
-      board[position] = glyph;
+      board[pos] = glyph;
 
       return board.Where(x => x == Square.E).Count() == 0;
     }
